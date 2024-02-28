@@ -1,0 +1,16 @@
+diff --git a/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm b/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
+index d06b0aa8d1c2bf7a94d869084fb83fbf8bb5ea64..08bc22ca3cd50f9c68591b2ffb6bf95ad834d19d 100644
+--- a/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
++++ b/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
+@@ -92,6 +92,11 @@ - (void)setBackgroundColor:(UIColor *)backgroundColor
+   _backgroundColor = backgroundColor;
+ }
+ 
++- (void)setAutoresizingMask:(UIViewAutoresizing)autoresizingMask
++{
++    [super setAutoresizingMask:autoresizingMask];
++}
++
+ #pragma mark - RCTComponentViewProtocol
+ 
+ + (ComponentDescriptorProvider)componentDescriptorProvider
