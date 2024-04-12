@@ -1,28 +1,75 @@
 import React from 'react';
-import {StyleSheet, View, Text, SafeAreaView, Button} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Button,
+  ScrollView,
+} from 'react-native';
 import PagerView from 'react-native-pager-view';
 
+const PagerData = new Array(100).fill(null).map((_, index) => index);
+const Data = new Array(10).fill(null).map((_, index) => index);
+const Colors = [
+  'red',
+  'blue',
+  'green',
+  'yellow',
+  'purple',
+  'orange',
+  'pink',
+  'black',
+  'wheat',
+  'gray',
+];
+
 const MyPager = () => {
-  const [visible, setVisible] = React.useState(false);
+  const [pagerVisible, setPagerVisible] = React.useState(false);
+  const [squaresVisible, setSquaresVisible] = React.useState(false);
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <Button
-        title={visible ? 'Hide' : 'Show'}
+        title={pagerVisible ? 'Hide pager' : 'Show pager'}
         onPress={() => {
-          setVisible(!visible);
+          setPagerVisible(!pagerVisible);
         }}
       />
 
-      {visible && (
+      <Button
+        title={squaresVisible ? 'Hide squares' : 'Show squares'}
+        onPress={() => {
+          setSquaresVisible(!squaresVisible);
+        }}
+      />
+
+      {pagerVisible && (
         <PagerView style={styles.pagerView} initialPage={0}>
-          <View key="1">
-            <Text>First page</Text>
-          </View>
-          <View key="2">
-            <Text>Second page</Text>
-          </View>
+          {PagerData.map(item => (
+            <View key={item}>
+              <Text>Page no. {item}</Text>
+            </View>
+          ))}
         </PagerView>
+      )}
+
+      {squaresVisible && (
+        <ScrollView style={{flex: 1}}>
+          {Data.flatMap(item =>
+            Colors.map(color => (
+              <View
+                key={`item-${item}-color-${color}`}
+                style={{
+                  width: 50,
+                  height: 50,
+                  backgroundColor: color,
+                  margin: 5,
+                }}
+              />
+            )),
+          )}
+        </ScrollView>
       )}
     </SafeAreaView>
   );
